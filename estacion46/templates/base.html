@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {% block title %}
+      <title>Estación 46</title>
+    {% endblock %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'estacion46/css/master.css' %}">
+  </head>
+  <body>
+    {% block precontent %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a href="{% url 'dashboard' %}" class='navbar-brand'><img class="logo" src="{% static 'estacion46/images/logo estacion46.jpg' %}" alt=""></a>
+        {% if user.is_authenticated %}
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="{% url 'products:all' %}"><button type="button" class="btn btn-outline-info">Productos</button></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'inventory:all' %}"><button type="button" class="btn btn-outline-info">Inventario</button></a></li>
+          </ul>
+          <a class="nav-link text-warning"><h5>Bienvenido: @{{ user.username }}</h5></a>
+          <form action="#" method="GET" class="form-inline">
+            <div class="input-group">
+              <input type="text" name='q' class="form-control border-success" type="search" placeholder="" aria-label="Search" aria-describedby="button-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-success mr-sm-2" type="submit" id="button-addon2">Buscar</button>
+              </div>
+            </div>
+            <!-- <button class="btn btn-outline-success my-2 mr-sm-2" type="submit">Buscar</button> -->
+          </form>
+          <a href="{% url 'accounts:logout' %}"><button type="button" class="btn btn-outline-danger">Salir</button></a>
+        {% else %}
+          <!-- <ul class="navbar-nav mr-auto"></ul>
+          <a href="#"><button type="button" class="btn btn-outline-primary my-2 my-sm-0 mr-sm-2">Log In</button></a> -->
+        {% endif %}
+      </div>
+    </nav>
+    {% endblock %}
+
+    <div class="container">
+      <p></p>
+      {% block content %}
+
+      {% endblock %}
+    </div>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript" src="{% static 'static/js/master.js' %}"></script>
+    {% block extrajs %}
+    {% endblock extrajs %}
+  </body>
+</html>

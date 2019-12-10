@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'inventory_app',
+    'products',
 ]
 
 MIDDLEWARE = [
@@ -123,5 +124,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,"static")]
 
-LOGIN_REDIRECT_URL = 'crud_app:all'
+LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'thanks'

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Inventario</title>
+{% endblock %}
+
+{% block content %}
+<button onclick="abrir_modal_edicion('{% url 'inventory:create' %}')" type="button" class="btn btn-primary" >
+  Agregar
+</button>
+<p></p>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr class="position-relative">
+        <th scope="col">#</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Codigo</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Fecha de Ingreso</th>
+        <th scope="col">Usuario</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for inventories in inventory_list %}
+      <tr>
+        <th scope="row">{{ inventories.id }}</th>
+        <td>{{ inventories.producto }}</td>
+        <td>{{ inventories.codigo }}</td>
+        <td>{{ inventories.cantidad }}</td>
+        <td>{{ inventories.fecha_Ingreso }}</td>
+        <td>
+          <div class="form-inline">
+            <div class="col-sm-4">
+              {{ inventories.user }}
+            </div>
+            <div class="col-sm-8 mb-1">
+              <a href="#" title="delete" class="btn btn-outline-danger btn-sm">
+                Salida Forzada
+              </a>
+            </div>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+  <div class="modal fade" id="edicion" role="dialog">
+
+  </div>
+
+{% endblock %}
+
+{% block extrajs %}
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
+    function abrir_modal_edicion(url){
+      $('#edicion').load(url, function(){
+        $(this).modal('show');
+      });
+    }
+</script>
+{% endblock extrajs %}
+
+{% block footer %}{% endblock %}

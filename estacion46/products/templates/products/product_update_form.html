@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Actualizar</title>
+{% endblock %}
+
+{% block precontent %}{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+  <form method="post">
+    {% csrf_token %}
+    <!-- {{ form.as_p }} -->
+    <div class="form-group row">
+       <label for="id_email" class="col-sm-2 col-form-label">Email</label>
+       <div class="col-sm-10">
+         <input type="email" name="email" maxlength="254" class="form-control" id="id_email" required value="{{ client.email }}">
+       </div>
+     </div>
+     <div class="form-group row">
+       <div class="col-sm-10">
+         <input type="submit" value="Actualizar" class="btn btn-primary btn-large">
+       </div>
+     </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

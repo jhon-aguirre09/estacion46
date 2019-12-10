@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Listado Productos</title>
+{% endblock %}
+
+{% block content %}
+<button type="button" onclick="abrir_modal_edicion('{% url 'products:create' %}')" class="btn btn-primary" >
+  Agregar
+</button>
+<p></p>
+<table class="table table-hover table-striped table-responsive-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Producto</th>
+      <th scope="col">Codigo</th>
+      <th scope="col">Codigo Interno</th>
+      <th scope="col">Presentación</th>
+      <th scope="col">Precio entrada</th>
+      <th scope="col">Precio venta</th>
+      <th scope="col">Fecha de Ingreso</th>
+      <th scope="col">Usuario</th>
+      <th colspan="2" scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for products in product_list %}
+    <tr>
+      <th scope="row">{{ products.id }}</th>
+      <td>{{ products.nombre }}</td>
+      <td>{{ products.codigo }}</td>
+      <td>{{ products.codigo_Interno }}</td>
+      <td>{{ products.presentacion }}</td>
+      <td>{{ products.precio_Ingreso }}</td>
+      <td>{{ products.precio_Venta }}</td>
+      <td>{{ products.fecha }}</td>
+      <td>{{ products.user }}</td>
+      <td>
+        <div>
+          <a href="#" onclick="abrir_modal_edicion('{% url 'products:update' %}')" title="update" class="btn btn-outline-info btn-sm">
+            Editar
+          </a>
+        </div>
+      </td>
+      <td>
+        <div>
+          <a href="#" title="update" class="btn btn-outline-danger btn-sm">
+            Borrar
+          </a>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+
+{% endblock %}
+
+{% block extrajs %}
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
+    function abrir_modal_edicion(url){
+      $('#edicion').load(url, function(){
+        $(this).modal('show');
+      });
+    }
+</script>
+{% endblock extrajs %}
+
+{% block footer %}{% endblock %}
