@@ -1,14 +1,17 @@
-<form method="POST" action="{% url 'products:edit' pk=product.pk %}">
+{% load widget_tweaks %}
+
+<form method="post" action="">
   {% csrf_token %}
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Modificar</h5>
+    <h5 class="modal-title">Nuevo Ingreso</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+
   <div class="modal-body">
     <div class="jumbotron">
-      <h1 class="display-6">Modificar</h1>
+      <h1 class="display-6">Nueva Entrada</h1>
       <hr class="my-4">
       <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
         {% for error in form.non_field_errors %}
@@ -22,77 +25,76 @@
       </div>
       <div class="form-group{% if form.user.errors %} invalid{% endif %}">
       {% for error in form.user.errors %}
-        <p><strong>{{ error }}</strong></p>
+        <p>{{ error }}</p>
       {% endfor %}
-    </div>
+      </div>
       <div class="form-group row">
         <div class="col-sm-12">
-          <input type="text" class="form-control" required name="nombre" id="id_nombre" placeholder="Producto" value="{{ product.nombre }}">
+          <input type="text" class="form-control" required name="nombre" id="id_nombre" placeholder="Producto">
         </div>
       </div>
       <div class="form-group{% if form.nombre.errors %} invalid{% endif %}">
       {% for error in form.nombre.errors %}
-        <p><strong>{{ error }}</strong></p>
+        <p>{{ error }}</p>
       {% endfor %}
       </div>
-      <div class="form-group form-row">
+      <div class="form-group row">
         <div class="col-sm-4">
-          <input type="text" class="form-control" required name="codigo" id="id_codigo" placeholder="Codigo" value="{{ product.codigo }}">
+          <input type="text" class="form-control" required name="codigo" id="id_codigo" placeholder="Codigo">
         </div>
         <div class="col-sm-4">
-          <input type="text" class="form-control" readonly name="codigo_Interno" id="id_codigo_Interno" placeholder="Cod. Interno" value="{{ product.codigo_Interno }}">
+          <input type="text" class="form-control" required name="codigo_Interno" id="id_codigo_Interno" placeholder="Cod. Interno">
         </div>
         <div class="col-sm-4">
-          <input type="text" class="form-control" required name="presentacion" id="id_presentacion" placeholder="Presentación" value="{{ product.presentacion }}">
+          <input type="text" class="form-control" required name="presentacion" id="id_presentacion" placeholder="Presentación">
         </div>
       </div>
       <div class="col-sm-4">
         <div class="form-group{% if form.codigo.errors %} invalid{% endif %}">
         {% for error in form.codigo.errors %}
-          <p><strong>{{ error }}</strong></p>
+          <p>{{ error }}</p>
         {% endfor %}
         </div>
       </div>
       <div class="col-sm-4">
         <div class="form-group{% if form.codigo_Interno.errors %} invalid{% endif %}">
         {% for error in form.codigo_Interno.errors %}
-          <p><strong>{{ error }}</strong></p>
+          <p>{{ error }}</p>
         {% endfor %}
         </div>
       </div>
       <div class="col-sm-4">
         <div class="form-group{% if form.presentacion.errors %} invalid{% endif %}">
         {% for error in form.presentacion.errors %}
-          <p><strong>{{ error }}</strong></p>
+          <p>{{ error }}</p>
         {% endfor %}
         </div>
       </div>
-      <div class="form-group form-row">
+      <div class="form-group row">
         <div class="col-sm-6">
-          <input type="text" class="form-control" required name="precio_Ingreso" id="id_precio_Ingreso" placeholder="Precio Ingreso" value="{{ product.precio_Ingreso}}">
+          <input type="text" class="form-control" required name="precio_Ingreso" id="id_precio_Ingreso" placeholder="Precio Ingreso">
         </div>
         <div class="col-md-6">
-          <input type="text" class="form-control" required name="precio_Venta" id="id_precio_Venta" placeholder="Precio Venta" value="{{ product.precio_Venta }}">
+          <input type="text" class="form-control" required name="precio_Venta" id="id_precio_Venta" placeholder="Precio Venta">
         </div>
       </div>
       <div class="col-md-6">
         <div class="{% if form.precio_Ingreso.errors %} invalid{% endif %}">
         {% for error in form.precio_Ingreso.errors %}
-          <li><strong>{{ error }}</strong></li>
+          <li>{{ error }}</li>
         {% endfor %}
         </div>
       </div>
       <div class="col-md-6">
         <div class="{% if form.precio_Venta.errors %} invalid{% endif %}">
         {% for error in form.precio_Venta.errors %}
-          <li><strong>{{ error }}</strong></li>
+          <li>{{ error }}</li>
         {% endfor %}
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <input type="submit" value="Editar" class="submit-btn btn btn-primary">
-      </div>
     </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="submit-btn btn btn-primary">Crear</button>
   </div>
 </form>

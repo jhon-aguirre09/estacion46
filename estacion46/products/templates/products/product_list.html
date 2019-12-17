@@ -4,12 +4,14 @@
   <title>Listado Productos</title>
 {% endblock %}
 
+{% block breadcrumb %}Productos{% endblock %}
+
 {% block content %}
-<button type="button" onclick="abrir_modal_edicion('{% url 'products:create' %}')" class="btn btn-primary" >
+<button type="button" class="create-product btn btn-primary" name="button" >
   Agregar
 </button>
 <p></p>
-<table class="table table-hover table-striped table-responsive-sm">
+<table class="table table-hover table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -25,50 +27,55 @@
     </tr>
   </thead>
   <tbody>
-    {% for products in product_list %}
+    {% for product in products %}
     <tr>
-      <th scope="row">{{ products.id }}</th>
-      <td>{{ products.nombre }}</td>
-      <td>{{ products.codigo }}</td>
-      <td>{{ products.codigo_Interno }}</td>
-      <td>{{ products.presentacion }}</td>
-      <td>{{ products.precio_Ingreso }}</td>
-      <td>{{ products.precio_Venta }}</td>
-      <td>{{ products.fecha }}</td>
-      <td>{{ products.user }}</td>
+      <th scope="row">{{ product.id }}</th>
+      <td>{{ product.nombre }}</td>
+      <td>{{ product.codigo }}</td>
+      <td>{{ product.codigo_Interno }}</td>
+      <td>{{ product.presentacion }}</td>
+      <td>{{ product.precio_Ingreso }}</td>
+      <td>{{ product.precio_Venta }}</td>
+      <td>{{ product.fecha|date:"SHORT_DATE_FORMAT" }}</td>
+      <td>{{ product.user }}</td>
       <td>
-        <div>
-          <a href="#" onclick="abrir_modal_edicion('{% url 'products:update' %}')" title="update" class="btn btn-outline-info btn-sm">
-            Editar
-          </a>
-        </div>
-      </td>
-      <td>
-        <div>
-          <a href="#" title="update" class="btn btn-outline-danger btn-sm">
-            Borrar
-          </a>
-        </div>
+        <button type="button" class="update-product btn btn-sm btn-outline-info" data-id="{% url 'products:edit' product.pk %}">Editar</button>
+        <button type="button" class="delete-product btn btn-sm btn-outline-danger" data-id="{% url 'products:delete' product.pk %}">Borrar</button>
       </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 
-<div class="modal fade" id="edicion" role="dialog">
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
 
+    </div>
+  </div>
 </div>
 
 {% endblock %}
 
 {% block extrajs %}
 <script type="text/javascript">
-    var $ = jQuery.noConflict();
-    function abrir_modal_edicion(url){
-      $('#edicion').load(url, function(){
-        $(this).modal('show');
-      });
-    }
+
+  $(function() {
+       // Create product button
+    $(".create-product").modalForm({formURL: "{% url 'products:create_product' %}"});
+
+     // Update product buttons
+    $(".update-product").each(function () {
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    // Delete product buttons
+    $(".delete-product").each(function () {
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+  });
+
 </script>
 {% endblock extrajs %}
 

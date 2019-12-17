@@ -6,6 +6,7 @@ app_name = 'products'
 
 urlpatterns = [
     path('', views.ProductList.as_view(),name='all'),
-    path('nuevo/', views.CreateProduct.as_view(),name='create')
-    re_path(r'editar/(?P<pk>\d+)/$',views.ClientUpdate.as_view(),name='product_edit'),
+    path('nuevo/', views.ProductCreateView.as_view(),name='create_product'),
+    path('editar/<int:pk>', views.ProductUpdateView.as_view(), name='edit'),
+    path('borrar/<int:pk>', views.ProductDeleteView.as_view(), name='delete'),
 ]
